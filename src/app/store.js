@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import cartReducer from '../features/cart/cartSlice.js'
+import cartReducer from '../features/cart/cartSlice'
 
 export const store = configureStore({
   reducer: {
@@ -8,4 +8,4 @@ export const store = configureStore({
   },
 });
 
-
+console.log(store);

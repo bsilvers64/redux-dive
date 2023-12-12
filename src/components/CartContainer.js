@@ -6,7 +6,7 @@ import { clearCart } from '../features/cart/cartSlice'
 
 export default function CartContainer() {
   const dispatch = useDispatch()
-  const {cartItems, total, amount} = useSelector((store)=>store.cart)
+  const {cartItems, total, amount} = useSelector((state)=>state.cart)
 
   if (amount < 1) {
     return <section className='cart'>
@@ -34,7 +34,14 @@ export default function CartContainer() {
             total <span>${total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn" onClick={()=>{dispatch(clearCart())}}>clear cart</button>
+        <button
+          className="btn clear-btn"
+          onClick={() => {
+            dispatch(clearCart());
+          }}
+        >
+          clear cart
+        </button>
       </footer>
     </section>
   );

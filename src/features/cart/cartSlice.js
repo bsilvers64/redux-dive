@@ -3,7 +3,7 @@ import cartItems from "../../cartItems";
 
 const initialState = {
     cartItems: cartItems,
-    amount: 1,
+    amount: 4,
     total: 0,
     isLoadin: true,
 }
@@ -13,14 +13,45 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    clearCart: (state)=> {
+    clearCart: (state) => {
       state.cartItems = [];
+    },
+    removeItem: (state, action) => {
+      const itemId = action.payload;
+      state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
+    },
+    increase: (state, action) => {
+      const itemId = action.payload;
+      const ourItem = state.cartItems.find((item) => item.id === itemId);
+      if (ourItem) {
+        //console.log(action.type);
+        ourItem.amount += 1;
+      }
+    },
+
+    // can also use function signature like this (destructured to only take payload of action)
+    decrease: (state, { payload }) => {
+      const ourItem = state.cartItems.find((item) => item.id === payload);
+      if (ourItem) {
+        ourItem.amount -= 1;
+      }
+    },
+
+    calculateTotal: (state, action) => {
+      let amount = 0
+      let total = 0
+      state.cartItems.forEach((item)=>{
+        amount += item.amount
+        total += item.price * item.amount
+      })
+      state.amount = amount
+      state.total = total
     },
   },
 });
 
 
-export const {clearCart} = cartSlice.actions
-console.log(cartSlice.actions);
+export const {clearCart, removeItem, increase, decrease, calculateTotal} = cartSlice.actions
+//console.log(cartSlice.reducer);
 export default cartSlice.reducer;
 
