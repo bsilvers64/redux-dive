@@ -12,6 +12,7 @@ const initialState = {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
+  
   reducers: {
     clearCart: (state) => {
       state.cartItems = [];
@@ -20,6 +21,7 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
     },
+
     increase: (state, action) => {
       const itemId = action.payload;
       const ourItem = state.cartItems.find((item) => item.id === itemId);
@@ -37,6 +39,11 @@ const cartSlice = createSlice({
       }
     },
 
+
+    // this reducer is to change our amount of items variable and the total price of cart
+    // it calculates the variables each time the cartItems object is changed, i.e. the number of any item
+    // is increased or decreased
+    
     calculateTotal: (state, action) => {
       let amount = 0
       let total = 0
@@ -50,6 +57,8 @@ const cartSlice = createSlice({
   },
 });
 
+// check all actioncreators in the myslice.actions object.
+//console.log(cartSlice.actions);
 
 export const {clearCart, removeItem, increase, decrease, calculateTotal} = cartSlice.actions
 //console.log(cartSlice.reducer);

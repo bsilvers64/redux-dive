@@ -13,7 +13,7 @@ function CartItem({ id, img, title, price, amount }) {
       <div>
         <h4>{title}</h4>
         <h4 className="item-price">${price}</h4>
-        {/* remove button */}
+        {/* remove all items button */}
         <button className="remove-btn" onClick={()=>{dispatch(removeItem(id))}}>remove</button>
       </div>
       <div>
