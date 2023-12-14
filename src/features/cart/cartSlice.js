@@ -1,18 +1,29 @@
 import { createSlice} from "@reduxjs/toolkit";
-import cartItems from "../../cartItems";
+//import cartItems from "../../cartItems";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+const url = "https://course-api.com/react-useReducer-cart-project";
 
 const initialState = {
-    cartItems: cartItems,
+    cartItems: [],
     amount: 4,
     total: 0,
     isLoadin: true,
 }
 
+// asynchronous action creator
+export const getCartItems = createAsyncThunk( 'cart/getCartItems', ()=>{
+    return fetch(url)
+    .then(resp => resp.json())
+    .catch((err) => console.log(err));
+});
+
+
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  
+
   reducers: {
     clearCart: (state) => {
       state.cartItems = [];
@@ -26,7 +37,7 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       const ourItem = state.cartItems.find((item) => item.id === itemId);
       if (ourItem) {
-        //console.log(action.type);
+        console.log(action);
         ourItem.amount += 1;
       }
     },
@@ -39,20 +50,33 @@ const cartSlice = createSlice({
       }
     },
 
-
     // this reducer is to change our amount of items variable and the total price of cart
     // it calculates the variables each time the cartItems object is changed, i.e. the number of any item
     // is increased or decreased
-    
+
     calculateTotal: (state, action) => {
-      let amount = 0
-      let total = 0
-      state.cartItems.forEach((item)=>{
-        amount += item.amount
-        total += item.price * item.amount
-      })
-      state.amount = amount
-      state.total = total
+      let amount = 0;
+      let total = 0;
+      state.cartItems.forEach((item) => {
+        amount += item.amount;
+        total += item.price * item.amount;
+      });
+      state.amount = amount;
+      state.total = total.toFixed(2);
+    },
+  },
+
+  extraReducers: {
+    [getCartItems.pending]: (state) => {
+      state.isLoadin = true;
+    },
+    [getCartItems.fulfilled]: (state, action) => {
+      console.log(action);
+      state.isLoadin = false;
+      state.cartItems = action.payload;
+    },
+    [getCartItems.rejected]: (state) => {
+      state.isLoadin = false;
     },
   },
 });
