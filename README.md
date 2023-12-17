@@ -13,18 +13,18 @@ This project serves as a comprehensive exploration of Redux Toolkit in building 
 Redux is a versatile state management library that can be seamlessly integrated with any front-end framework, showcasing its flexibility and applicability beyond React.
 
 ### 2. first we setup the store. we can think about it as the entire state of the application.
-	we create it using the configureStore function provided by the redux-toolkit library.
-	we import a provider component in indexjs and pass our store as a prop to this component, while enclosing the the app /root component in the provider components.
+we create it using the configureStore function provided by the redux-toolkit library.
+we import a provider component in indexjs and pass our store as a prop to this component, while enclosing the the app /root component in the provider components.
 
 The `<Provider>` component makes the Redux store available to any nested components that need to access the Redux store.
 
 ### 2.1. One call to configureStore will:
 
-1. Call combineReducers to combine your slices reducers into the root reducer function
-2. Add the thunk middleware and called applyMiddleware
-3. In development, automatically add more middleware to check for common mistakes like accidentally mutating the state
-4. Automatically set up the Redux DevTools Extension connection
-5. Call createStore to create a Redux store using that root reducer and those configuration options
+	1. Call combineReducers to combine your slices reducers into the root reducer function
+	2. Add the thunk middleware and called applyMiddleware
+ 	3. In development, automatically add more middleware to check for common mistakes like accidentally mutating the state
+	4. Automatically set up the Redux DevTools Extension connection
+	5. Call createStore to create a Redux store using that root reducer and those configuration options
 
 Components that need access to the state slices can use the useSelector and useDispatch hooks provided by react-redux. These hooks simplify the process of extracting data from the store and dispatching actions.
 
