@@ -8,11 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project serves as a comprehensive exploration of Redux Toolkit in building a shopping cart application. The key learnings and insights gained from this project are outlined below:
 
-### 1. redux can be used with any front-end framework, its not specific to react.
+### 1. 🌐 Redux can be used with any front-end framework, its not specific to react.
 
 Redux is a versatile state management library that can be seamlessly integrated with any front-end framework, showcasing its flexibility and applicability beyond React.
 
-### 2. first we setup the store. we can think about it as the entire state of the application.
+### 2. 🛒 First we setup the store. we can think about it as the entire state of the application.
 we create it using the configureStore function provided by the redux-toolkit library.
 we import a provider component in indexjs and pass our store as a prop to this component, while enclosing the the app /root component in the provider components.
 
